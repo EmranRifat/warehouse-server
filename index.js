@@ -1,12 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-
-require('dotenv').config()
-const port = process.env.PORT || 5000;
-
+const express = require("express");
+const { MongoClient, ServerApiVersion, ObjectId} = require("mongodb");
+require("dotenv").config();
+const cors = require("cors");
 const app = express();
+const port = process.env.PORT || 5000;
 
 // middelware
 app.use(cors());
@@ -16,15 +14,14 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
-async function run() {
+async function run() { 
 
     try {
 
         await client.connect();
         const serviceWare = client.db('wareHosue').collection('services');
 
-        app.get
-            ('/service', async (req, res) => {
+        app.get('/service', async (req, res) => {
                 const query = {};
                 const cursor = serviceWare.find(query);
                 const service = await cursor.toArray();
@@ -93,6 +90,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('Listening to port', port);
+    // console.log('Listening to port', port);
 })
 // git push heroku main
