@@ -18,7 +18,7 @@ async function run() {
 
     try {
 
-        await client.connect();
+        // await client.connect();
         const serviceWare = client.db('wareHosue').collection('services');
 
         app.get('/service', async (req, res) => {
